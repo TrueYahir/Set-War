@@ -32,6 +32,36 @@ Clerigo = Character(name="Clerigo", power=1, energy=20, health=70, abilities=[Cu
 
 #Impresión de personajes
 
+class Menu:
+    def __init__(self):
+        self.font = pygame.font.SysFont(None, 30)
+        self.texts = ["Cantidad de caballeros", "Cantidad de arqueros", "Cantidad de clerigos:"]
+        self.inputs = [0,0,0]
+        self.start_button_rect = pygame.Rect(600,500,150,50)
+        self.start_button_text = self.font.render("Iniciar Juego", True, BLACK)
+    
+    def draw(self):
+        for i, text in enumerate(self.texts):
+            text_surface = self.font.render(text, True, BLACK)
+            WIN.blit(text_surface, (50, 50 + i * 50))
+            pygame.draw.rect(WIN, BLACK, (350, 50 + i * 50, 50, 30))
+            text_input = self.font.render(str(self.inputs[i]), True, BLACK)
+            WIN.blit(text_input, (355, 55 + i * 50))
+            
+        pygame.draw.rect(WIN, BLACK, self.start_button_rect)
+        WIN.blit(self.start_button_text, (self.start_button_rect.x + 20, self.start_button_rect.y + 15))
+        
+    def handle_event(self, event):
+        if event.type == pygame.MOUSEBUTTONDOWN:
+            for i in range(3):
+                rect = pygame.Rect(350, 50 + i * 50, 50, 30)
+                if rect.collidepoint(event.pos):
+                    self.inputs[i] += 1
+        elif event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
+            if self.start_button_rect.collidepoint(event.pos):
+                return True
+        return False    
+        
 
 def main():
     run = True
