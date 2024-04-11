@@ -14,6 +14,7 @@ WIN = pygame.display.set_mode(WINDOWS_SIZE)
 pygame.display.set_caption("Set War")
 WHITE = (255,255,255)
 BLACK = (0,0,0)
+loads = LoadedSprites()
 
 #Creación de habilidades
 Corte = Ability(name="Corte",type="damage", power=30, energy_cost=10, health_cost=0)
@@ -30,7 +31,7 @@ Clerigo = Character(name="Clerigo", power=1, energy=20, health=70, abilities=[Cu
 # player.use_ability("Heal", player_)
 
 #Impresión de personajes
-rey_sprite = CharacterSprite(LoadedSprites.Rey1_sprite, 100, 100)
+
 
 def main():
     run = True
@@ -40,6 +41,8 @@ def main():
                 run = False
                 
         WIN.fill(WHITE) 
+        rey_sprite = CharacterSprite(loads.Rey1_sprite, 100, 100)
+        rey_sprite.draw(WIN)
         pygame.display.update()
         
     pygame.quit()
